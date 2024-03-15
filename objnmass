@@ -1,0 +1,79 @@
+Массивы
+1
+<button onClick={() => {
+  setElements([...elements, /* new element */]);
+}}>
+  Add element
+</button>
+2
+<button onClick={() => {
+  if (deleteIndex !== null) {
+    const newElements = [...elements];
+    newElements.splice(deleteIndex, 1);
+    setElements(newElements);
+    setDeleteIndex(null);
+  }
+}}>
+  Delete element
+</button>
+3
+<button onClick={() => {
+  if (updateIndex !== null) {
+    const newElements = [...elements];
+    newElements[updateIndex] = /* new element value */;
+    setElements(newElements);
+    setUpdateIndex(null);
+  }
+}}>
+  Update element
+</button>
+4
+<button onClick={() => {
+  setElements([...elements].reverse());
+}}>
+  Reverse elements
+</button>
+Объекты
+import React from 'react';
+
+const initProds = [
+  { id: 1, name: 'prod1', catg: 'catg1', cost: 100 },
+  { id: 2, name: 'prod2', catg: 'catg2', cost: 200 },
+  { id: 3, name: 'prod3', catg: 'catg3', cost: 300 },
+];
+
+const ProductTable = () => {
+  const handleDelete = (id) => {
+    const updatedProds = initProds.filter((prod) => prod.id !== id);
+    initProds = updatedProds;
+  };
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Cost</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {initProds.map((product) => (
+          <tr key={product.id}>
+            <td>{product.id}</td>
+            <td>{product.name}</td>
+            <td>{product.catg}</td>
+            <td>{product.cost}</td>
+            <td>
+              <button onClick={() => handleDelete(product.id)}>Delete</button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
+export default ProductTable;
